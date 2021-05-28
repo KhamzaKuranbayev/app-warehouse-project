@@ -34,7 +34,6 @@ public class User {
     private String lastname;
 
     @Column(nullable = false, unique = true, length = 15)
-    @Length(min = 3, max = 10)
     private String email;
 
     @Column(nullable = false)
@@ -44,6 +43,6 @@ public class User {
     private Address address;        // address_id  int
 
     @ManyToMany
-    private List<Role> role;
+    private List<Role> roles;
 
 }
