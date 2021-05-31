@@ -36,7 +36,7 @@ public class UserController {
         if (optionalAddress.isEmpty())
             return "Sorry! Such address id was not found!";
 
-        if(userRepository.existsByEmail(userDTO.getEmail()))
+        if (userRepository.existsByEmail(userDTO.getEmail()))
             return "Such email already exists in system!";
 
         User user = new User();
@@ -64,7 +64,7 @@ public class UserController {
     @PutMapping("/{id}")
     public String editUser(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
         Optional<User> optionalUser = userRepository.findById(id);
-        if(optionalUser.isEmpty())
+        if (optionalUser.isEmpty())
             return "Such user id was not found!";
 
         User user = optionalUser.get();
@@ -78,17 +78,23 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Integer id) {
-        return "sdsd";
+        if (userRepository.existsById(id))
+        {userRepository.delete(userRepository.getById(id));
+            return "user deleted";}
+        else {return  "such usr id was not found! ";}
     }
 
     @GetMapping
     public List<User> getAllUser() {
-        return new ArrayList<>();
+        return userRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public User getOneUser(@PathVariable Integer id) {
-        return new User();
+        Optional<User> byId = userRepository.findById(id);
+        if (byId.isEmpty())
+            return new User();
+        return byId.get();
     }
 
 }
