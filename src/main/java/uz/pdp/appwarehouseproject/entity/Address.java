@@ -20,6 +20,6 @@ public class Address {
     private String name;
 
     @Column(nullable = false)
-    private String postalCode;
+    private String postalCode;          // 221-512
 
 }

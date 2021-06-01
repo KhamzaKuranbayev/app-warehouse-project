@@ -3,6 +3,7 @@ package uz.pdp.appwarehouseproject.controller;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.appwarehouseproject.dto.Response;
 import uz.pdp.appwarehouseproject.dto.UserDTO;
+import uz.pdp.appwarehouseproject.entity.User;
 import uz.pdp.appwarehouseproject.service.UserService;
 
 @RestController
@@ -13,6 +14,12 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/postalCode")
+    public Response getAllUsersByPostalCode(@RequestParam(name = "pochtaIndex") String index) {
+        Response response = userService.getAllUsersByPostalCode(index);
+        return response;
     }
 
     @PostMapping

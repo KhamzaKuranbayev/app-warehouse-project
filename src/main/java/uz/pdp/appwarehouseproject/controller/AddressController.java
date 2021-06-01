@@ -1,5 +1,9 @@
 package uz.pdp.appwarehouseproject.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.appwarehouseproject.entity.Address;
 import uz.pdp.appwarehouseproject.repository.AddressRepository;
@@ -17,6 +21,14 @@ public class AddressController {
         this.addressRepository = addressRepository;
     }
 
+    @GetMapping("/page")
+    public List<Address> getAddressesPage(@RequestParam("page") Integer page, @RequestParam("size") Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+
+        Page<Address> addressPage = addressRepository.findAllByPostalCode("1", pageable);
+
+        return addressPage.toList();
+    }
 
     @GetMapping
     public List<Address> getAllAddress(){

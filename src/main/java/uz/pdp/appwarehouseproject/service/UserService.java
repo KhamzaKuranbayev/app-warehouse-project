@@ -96,4 +96,15 @@ public class UserService {
             return new Response("Such user id was not found!", false);
         return new Response("Success!", true, optionalUser.get());
     }
+
+    public Response getAllUsersByPostalCode(String postalCode) {
+        //List<User> userList = userRepository.getKetmonsByPochtaKodi(postalCode);
+        //List<User> userList = userRepository.getKetmonsByPochtaKodiNative(postalCode);
+        List<User> userList = userRepository.findAllByAddress_PostalCode(postalCode);
+
+        if (userList.isEmpty())
+            return new Response("Not Success!", false);
+
+        return new Response("Success!", true, userList);
+    }
 }
