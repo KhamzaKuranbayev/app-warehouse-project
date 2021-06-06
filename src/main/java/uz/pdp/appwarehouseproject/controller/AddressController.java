@@ -5,12 +5,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import uz.pdp.appwarehouseproject.entity.Address;
 import uz.pdp.appwarehouseproject.repository.AddressRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@EnableSwagger2
 @RestController
 @RequestMapping("/api/address")
 public class AddressController {
@@ -56,7 +58,7 @@ public class AddressController {
         return "address updated";
     }
     
-    @PutMapping
+    @PostMapping
     public String addAddress(@RequestBody Address address){
         Address address1 = new Address();
         address1.setName(address.getName());
