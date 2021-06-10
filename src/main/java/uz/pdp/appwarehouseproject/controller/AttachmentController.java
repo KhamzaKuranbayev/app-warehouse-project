@@ -29,6 +29,11 @@ public class AttachmentController {
         this.attachmentService = attachmentService;
     }
 
+    @PostMapping("/uploadToSystem")
+    public Response uploadFilesToSystem(@RequestParam("files") List<MultipartFile> files,
+                                      @RequestParam("images") List<MultipartFile> images) {
+        return attachmentService.uploadFilesToSystem(files, images);
+    }
 
     @PostMapping("/uploadArray")
     public String saveArray(List<MultipartFile> files, List<MultipartFile> images) {

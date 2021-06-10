@@ -26,12 +26,19 @@ public class Attachment {
 
     private String contentType;         // application/json, image/jpg, ...
 
-    // BU NAME FILE NI SYSTEMGA SAQLAGANDA KERAK BO'LADI, VA PAPKANI ICHIDAN QIDIRISH OSON BO'LADI
+    // BU NAME FILE NI SYSTEMGA SAQLAGANDA KERAK BO'LADI, VA PAPKANI ICHIDAN QIDIRISH KERAK BO'LADI
     private String name;
 
     public Attachment(String fileOriginalName, long size, String contentType) {
         this.fileOriginalName = fileOriginalName;
         this.size = size;
         this.contentType = contentType;
+    }
+
+    public Attachment(String fileOriginalName, long size, String contentType, String name) {
+        this.fileOriginalName = fileOriginalName;
+        this.size = size;
+        this.contentType = contentType;
+        this.name = name;
     }
 }
