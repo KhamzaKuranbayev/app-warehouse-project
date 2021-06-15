@@ -1,5 +1,6 @@
 package uz.pdp.appwarehouseproject.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+
 public class AttachmentContent {
 
     @Id
@@ -17,9 +19,9 @@ public class AttachmentContent {
     private Integer id;
 
     @OneToOne
-    private Attachment attachment;
+    private  Attachment attachment;
 
-    private byte[] asosiyContent;   // ASOSIY CONTENT (MAG'ZI)
+    private byte[] asosiyContent;    //asosiy content (mag'zi)
 
     public AttachmentContent(Attachment attachment, byte[] asosiyContent) {
         this.attachment = attachment;

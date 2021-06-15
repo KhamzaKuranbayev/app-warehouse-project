@@ -1,6 +1,6 @@
 package uz.pdp.appwarehouseproject.controller;
 
-import com.google.common.io.Files;
+
 import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +12,7 @@ import uz.pdp.appwarehouseproject.service.AttachmentService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
@@ -22,7 +23,6 @@ import java.util.List;
 public class AttachmentController {
 
     final AttachmentService attachmentService;
-
     private final Path root = Paths.get("src/main/resources/files");
 
     public AttachmentController(AttachmentService attachmentService) {
@@ -36,9 +36,10 @@ public class AttachmentController {
     }
 
     @PostMapping("/uploadArray")
-    public String saveArray(List<MultipartFile> files, List<MultipartFile> images) {
+    public  String saveArray(List<MultipartFile> files, List<MultipartFile> images){
 
         List<MultipartFile> files1 = files;
+
         for (MultipartFile file : files1) {
 
         }
@@ -48,7 +49,7 @@ public class AttachmentController {
 
         }
 
-        return "Test";
+        return "test";
 
     }
 
@@ -69,36 +70,45 @@ public class AttachmentController {
                     originalFilename,
                     size,
                     contentType
+
             );
 
-           Attachment savedAttachment = attachmentService.saveAttachment(attachment);
+            Attachment attachment1 = attachmentService.saveAttachment(attachment);
 
-           // FILENI CONTENTINI SAQLAYMIZ
+            // Fileni contentini saqlaymiz
+
             AttachmentContent attachmentContent = new AttachmentContent(
-                    savedAttachment,
+                    attachment1,
                     file.getBytes()
             );
 
             return attachmentService.saveAttachmentContent(attachmentContent);
+
+
+
+            return attachmentService.saveAttachmentContent(attachmentContent);
         }
 
-        return new Response("Error!", false);
+        return new Response("Error", false);
+
+
     }
 
     @GetMapping("/getFile/{id}")
-    public void getFile(@PathVariable Integer id, HttpServletResponse response){
-         attachmentService.getFile(id, response);
+    public void getFile(@PathVariable Integer id, HttpServletResponse  response) {
+
+        attachmentService.getFile(id, response);
+
     }
 
 
-    // File system ga upload qilishni ko'rish
-
-    /*@PostMapping("/uploadToSystem")
-    public Response uploadFileToSystem(MultipartHttpServletRequest request) {
+    // file system ga upload qilishni ko'rish
+   /* @PostMapping("/uploadTo System")
+    public Response uploadFileSystem(MultipartHttpServletRequest request) {
 
         Iterator<String> fileNames = request.getFileNames();
         MultipartFile file = request.getFile(fileNames.next());
-        if(file != null) {
+        if (file !=null) {
 
             String originalFilename = file.getOriginalFilename();
             long size = file.getSize();
@@ -108,15 +118,13 @@ public class AttachmentController {
                     originalFilename,
                     size,
                     contentType
+
             );
-
-
 
 
 
         }
 
-
-    }*/
-
+    }
+*/
 }

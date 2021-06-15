@@ -8,17 +8,19 @@ import uz.pdp.appwarehouseproject.entity.User;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface  UserRepository extends JpaRepository<User, Integer> {
 
     boolean existsByEmail(String email);
 
     // JPA Query
     List<User> findAllByAddress_PostalCode(String address_postalCode);      // alt+enter
 
-    // JPQL
+    // JPQL 1-usul
     /*@Query("select u from User u where u.address.postalCode = :postalCode")
     List<User> getKetmonsByPochtaKodi(String postalCode);
     */
+
+    //2-usul
     @Query("select u from User u where u.address.postalCode = ?1")
     List<User> getKetmonsByPochtaKodi(String postalCode);
 

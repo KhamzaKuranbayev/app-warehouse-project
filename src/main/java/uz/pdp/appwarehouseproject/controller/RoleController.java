@@ -1,60 +1,53 @@
 package uz.pdp.appwarehouseproject.controller;
 
+
 import org.springframework.web.bind.annotation.*;
+import uz.pdp.appwarehouseproject.dto.Response;
 import uz.pdp.appwarehouseproject.entity.Role;
-import uz.pdp.appwarehouseproject.repository.RoleRepository;
+import uz.pdp.appwarehouseproject.service.RoleService;
 
 import java.util.List;
 import java.util.Optional;
-
+@RequestMapping ("/api/role/")
 @RestController
-@RequestMapping("/api/role")
 public class RoleController {
 
-    final RoleRepository roleRepository;
 
-    public RoleController(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    final RoleService roleService;
+
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
     }
 
-    @GetMapping
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+
+    //CREATE
+   @PostMapping
+    public Response addRole(@PathVariable Role role) {
+return  roleService.addRole(role);
+            }
+
+    //READ
+   @GetMapping
+    public Response  getRole() {
+       return roleService.getRole();
     }
 
-    @GetMapping("/{id}")
-    public Role getOneRole(@PathVariable Integer id) {
-        Optional<Role> byId = roleRepository.findById(id);
-        if (byId.isEmpty())
-            return null;
-        return byId.get();
+
+    //UPDATE
+  @PutMapping("/{id}")
+    public  Response  update(@PathVariable(name = "id") Integer roleId, @RequestBody Role role) {
+
+    return     roleService.update(roleId, role);
+
     }
 
-    @PostMapping
-    public String addRole(@RequestBody Role role) {
-        roleRepository.save(role);
-        return "Role added ";
-    }
-
-    @PutMapping("/{id}")
-    public String updateRole(@PathVariable Integer id,@RequestBody Role role){
-        Optional<Role> role1 = roleRepository.findById(id);
-        if (role1.isEmpty())
-            return "such role id was not found";
-        Role role2 = role1.get();
-        role2.setRoleName(role.getRoleName());
-        role2.setDescription(role.getDescription());
-
-        return "Role updated";
-    }
-
+    //DELETE
     @DeleteMapping("/{id}")
-    public String deleteRole(@PathVariable Integer id){
-        Optional<Role> role1 = roleRepository.findById(id);
-        if (role1.isEmpty())
-            return "such role id was not found";
-        roleRepository.deleteById(id);
-        return "role deleted";
+    public Response delete(@PathVariable Integer id) {
+
+       return roleService.delete(id);
+
     }
+
 
 }

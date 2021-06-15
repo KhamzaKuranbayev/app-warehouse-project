@@ -40,7 +40,7 @@ public class User {
     private Timestamp createdAt;
 
     @OneToOne
-    private Address address;        // address_id  int
+    private Address address;       // address_id  int
 
     @ManyToMany
     private List<Role> roles;

@@ -19,6 +19,8 @@ public class XavfsizlikSozlamalari extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
+
+        // Buni men yozdim
         // ROLE       - lavozim
         // PERMISSION - Huquq
         auth

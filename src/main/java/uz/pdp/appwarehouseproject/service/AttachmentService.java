@@ -1,5 +1,7 @@
 package uz.pdp.appwarehouseproject.service;
 
+
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import uz.pdp.appwarehouseproject.dto.Response;
@@ -12,11 +14,17 @@ import java.util.List;
 @Service
 public interface AttachmentService {
 
+
+
     Attachment saveAttachment(Attachment attachment);
 
-    Response saveAttachmentContent(AttachmentContent content);
+    Response saveAttachmentContent(AttachmentContent attachmentContent);
 
-    void getFile(Integer id, HttpServletResponse response);
+
+    @SneakyThrows
+    void getFile(Integer attachmentId, HttpServletResponse response);
+
+
 
     Response uploadFilesToSystem(List<MultipartFile> files, List<MultipartFile>  images);
 }

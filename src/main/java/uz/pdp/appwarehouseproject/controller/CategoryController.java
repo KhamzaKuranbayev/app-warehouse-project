@@ -1,9 +1,11 @@
 package uz.pdp.appwarehouseproject.controller;
 
+
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.appwarehouseproject.dto.CategoryDTO;
+import uz.pdp.appwarehouseproject.dto.Response;
 import uz.pdp.appwarehouseproject.entity.Category;
-import uz.pdp.appwarehouseproject.repository.CategoryRepository;
+import uz.pdp.appwarehouseproject.service.CategoryService;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,62 +14,45 @@ import java.util.Optional;
 @RequestMapping("/api/category")
 public class CategoryController {
 
-    final CategoryRepository categoryRepository;
+    final CategoryService categoryService;
 
-
-    public CategoryController(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
+    //CREATE
+  @PostMapping
+    public Response addCategory(@RequestBody CategoryDTO categoryDTO) {
+      return categoryService.addCategory(categoryDTO);
+    }
+
+    //READ
     @GetMapping
-    public List<Category> getAllCategory() {
-        return categoryRepository.findAll();
+    public Response readAddress() {
+       return categoryService.readAddress();
     }
 
+    // Read One
     @GetMapping("/{id}")
-    public Category getOneCategory(@PathVariable Integer id) {
-        Optional<Category> category = categoryRepository.findById(id);
-        if (category.isEmpty())
-            return new Category();
-        return category.get();
+    public Response getOne(@PathVariable Integer id) {
+        return categoryService.readOneAddress(id);
     }
 
-    @PostMapping
-    public String addCategory(@RequestBody CategoryDTO categoryDTO) {
-        Optional<Category> category1 = categoryRepository.findById(categoryDTO.getParentId());
-        if (category1.isEmpty())
-            return "such category id was not found";
 
-        Category category = new Category();
-        category.setName(categoryDTO.getName());
-        category.setDescription(categoryDTO.getDescription());
-        category.setParent(category1.get());
-
-        categoryRepository.save(category);
-        return "category added";
-
-    }
-
+    //UPDATE
     @PutMapping("/{id}")
-    public String updateCategory(@PathVariable Integer id, @RequestBody CategoryDTO categoryDTO) {
-        Optional<Category> categoryById = categoryRepository.findById(id);
-        if (categoryById.isEmpty())
-            return "such category id was not found";
-        Optional<Category> optionalCategory = categoryRepository.findById(categoryDTO.getParentId());
-        if (optionalCategory.isEmpty())
-            return "such parentId was not found";
+    public  Response updateCategory(@PathVariable Integer id, @RequestBody CategoryDTO categoryDTO) {
+         return   categoryService.editUser(id, categoryDTO);
+    }
 
-        Category category = categoryById.get();
-        category.setName(categoryDTO.getName());
-        category.setDescription(categoryDTO.getDescription());
-        category.setParent(optionalCategory.get());
-        return "category updated";
+    //DELETE
+
+    @DeleteMapping
+    public  Response delete(@PathVariable Integer id){
+
+      return categoryService.delete(id);
 
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteCategory(@PathVariable Integer id){
-        categoryRepository.deleteById(id);
-        return "category deleted";
-    }
+
 }

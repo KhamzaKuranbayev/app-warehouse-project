@@ -1,5 +1,6 @@
 package uz.pdp.appwarehouseproject.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -15,15 +16,16 @@ public class SwaggerConfig {
 
     @Bean
     public Docket api() {
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("uz.pdp.appwarehouseproject.controller"))
                 .build().apiInfo(apiInfo());
+
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Address controller").build();
+        return new ApiInfoBuilder().title("Address  controller").build();
     }
-
 
 }
