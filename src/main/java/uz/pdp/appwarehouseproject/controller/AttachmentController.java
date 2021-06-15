@@ -83,15 +83,9 @@ public class AttachmentController {
             );
 
             return attachmentService.saveAttachmentContent(attachmentContent);
-
-
-
-            return attachmentService.saveAttachmentContent(attachmentContent);
         }
 
         return new Response("Error", false);
-
-
     }
 
     @GetMapping("/getFile/{id}")

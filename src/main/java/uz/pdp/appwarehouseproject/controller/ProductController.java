@@ -16,6 +16,8 @@ import java.util.Optional;
 @RestController
 public class ProductController {
 
+    //  GET, POST, PUT, DELETE,..     http://172.168.255.12/api/product
+
  final ProductService productService;
 
     public ProductController(ProductService productService) {

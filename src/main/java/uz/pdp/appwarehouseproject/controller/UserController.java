@@ -1,12 +1,14 @@
 package uz.pdp.appwarehouseproject.controller;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.appwarehouseproject.dto.Response;
 import uz.pdp.appwarehouseproject.dto.UserDTO;
-import uz.pdp.appwarehouseproject.entity.User;
 import uz.pdp.appwarehouseproject.service.UserService;
 
 @RestController
@@ -19,7 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping("/postalCode")
     public Response getAllUsersByPostalCode(@RequestParam(name = "pochtaIndex") String index) {
         Response response = userService.getAllUsersByPostalCode(index);
@@ -28,9 +29,9 @@ public class UserController {
 
     @PreAuthorize(value = "hasAuthority('ADD_USER')")
     @PostMapping
-    public Response addUser(@RequestBody UserDTO userDTO) {
-
-        return userService.addUser(userDTO);
+    public HttpEntity<Response> addUser(@RequestBody UserDTO userDTO) {
+        Response response = userService.addUser(userDTO);
+        return ResponseEntity.status(response.isSuccess() ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST).body(response);
     }
 
     @PreAuthorize(value = "hasAuthority('EDIT_USER')")
