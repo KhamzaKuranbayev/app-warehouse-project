@@ -38,7 +38,7 @@ public class RoleService {
 
         List<Role> list = roleRepository.findAll();
         if (list.isEmpty())
-            return new Response("such role id was not found", false);
+            return new Response(" Database hasn't things", false);
 
         return new Response("Good job bro", true, list);
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface AddressRepository  extends JpaRepository<Address, Integer > {
 
-    // Userni ichidan id buyicha tekwiraman va boolean qaytaraman. mavjud bulsa true yuq bulsa false qaytaraman
+    // Addresslarni ichidan id buyicha tekwiraman va boolean qaytaraman. mavjud bulsa true yuq bulsa false qaytaraman
 
     boolean existsById(Integer id);
 

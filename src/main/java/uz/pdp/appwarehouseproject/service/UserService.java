@@ -78,7 +78,7 @@ public class UserService {
             userRepository.delete(userRepository.getById(id));
             return new Response("User deleted!", true);
         } else {
-            return new Response("such usr id was not found! ", false);
+            return new Response("such user id was not found! ", false);
         }
     }
 

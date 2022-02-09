@@ -23,8 +23,8 @@ public class RoleController {
     //CREATE
    @PostMapping
     public Response addRole(@PathVariable Role role) {
-return  roleService.addRole(role);
-            }
+            return  roleService.addRole(role);
+    }
 
     //READ
    @GetMapping

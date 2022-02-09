@@ -33,8 +33,8 @@ public class OperationService {
     public Response create(OperationDTO operationDTO) {
 
         Optional<User> optionalUser = userRepository.findById(operationDTO.getUserId());
-
         User user = optionalUser.get();
+
         Optional<Product> optionalProduct = productRepository.findById(operationDTO.getProductId());
         Product product = optionalProduct.get();
 
@@ -69,8 +69,10 @@ public class OperationService {
         if (operationRepository.existsById(operationId)) {
 
             Optional<OperationHistory> byId = operationRepository.findById(operationId);
+
             Optional<Product> optionalProduct = productRepository.findById(operationDTO.getProductId());
             Product product = optionalProduct.get();
+
             Optional<User> optionalUser = userRepository.findById(operationDTO.getUserId());
             User user = optionalUser.get();
 

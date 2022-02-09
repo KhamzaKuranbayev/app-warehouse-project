@@ -25,7 +25,9 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Address  controller").build();
+        return new ApiInfoBuilder()
+                .title("Address  controller")
+                .build();
     }
 
 }

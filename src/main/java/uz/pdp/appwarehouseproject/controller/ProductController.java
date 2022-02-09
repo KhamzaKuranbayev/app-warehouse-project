@@ -4,12 +4,8 @@ package uz.pdp.appwarehouseproject.controller;
 import org.springframework.web.bind.annotation.*;
 import uz.pdp.appwarehouseproject.dto.ProductDTO;
 import uz.pdp.appwarehouseproject.dto.Response;
-import uz.pdp.appwarehouseproject.entity.Category;
-import uz.pdp.appwarehouseproject.entity.Product;
 import uz.pdp.appwarehouseproject.service.ProductService;
 
-import java.util.List;
-import java.util.Optional;
 
 
 @RequestMapping(path = "/api/product")

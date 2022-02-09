@@ -18,7 +18,7 @@ public class OperationHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne   // MAny operation To One User
+    @ManyToOne   // Many operation To One User
     private User user;
 
     @ManyToOne
